@@ -59,14 +59,16 @@ C_UID=$(id -u)
 C_GID=$(id -g)
 set -x
 exec docker run --rm \
-    --network host \
-    -it --privileged \
+     -it --privileged \
+     --network host \
     -e UID=${C_UID} \
     -e GID=${C_GID} \
     -e QT_X11_NO_MITSHM=1 \
     -e XDG_RUNTIME_DIR \
     -e HOME \
     -e USER \
+    -e DBUS_SESSION_BUS_ADDRESS \
+    -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY \
     -v /dev/dri:/dev/dri \
@@ -83,5 +85,3 @@ else
 set -x
 exec docker exec --user `whoami` -it ${NAME} /bin/bash --login -i
 fi
-
-    #-v /dev/dri:/dev/dri \
