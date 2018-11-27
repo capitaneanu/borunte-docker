@@ -38,6 +38,7 @@ ${SUDO} install qmodbus /usr/local/bin/
 # install CLion dependency
 ${SUDO} apt-get install -y \
         libxslt1.1 \
+        cmake \
         openjdk-8-jdk
 
 # Install network tools
